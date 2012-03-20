@@ -1,26 +1,29 @@
 require 'sqlite3'
 
-class Calamity::DataAccess
-  @@db_location = "#{ENV['HOME']}/.calamity/calamity.db"
-  @@db = SQLite3::Database.new @@db_location
+module Calamity
+  class DataAccess
   
-  def self.init
-    @@db.execute <<-SQL
-      create table tasks (
-        name varchar(30)
-      );
-    SQL
-  end
-
-  def self.add_task task
-    @@db.execute "insert into tasks values (?)", task.name  
-  end
-
-  def self.list_tasks
-    tasks = []
-    @@db.execute("select * from tasks") do |row|
-      tasks << Task.new
+    def initialize db_location
+      @db = SQLite3::Database.new db_location
+      @db.execute <<-SQL
+        create table tasks (
+          name varchar(30)
+        );
+      SQL
     end
-    tasks
+
+    def add_task task
+      @db.execute "insert into tasks values (?)", task.name  
+    end
+
+    def list_tasks
+      tasks = []
+      @db.execute("select * from tasks") do |row|
+        task = Task.new
+        task.name = row[0]  
+        tasks << task
+      end
+      tasks
+    end
   end
 end
