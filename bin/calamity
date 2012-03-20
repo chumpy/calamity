@@ -44,10 +44,10 @@ command :add do |c|
   c.flag [:p, :project]
   c.action do |global_options,options,args|
     task = Calamity::Task.new
-    task.name = args[1]
-    task.context = options[0]
-    task.project = options[1]
-    db = Calamity::DataAccess.new global_options[0]
+    task.name = args[0]
+    task.context = options[:context]
+    task.project = options[:project]
+    db = Calamity::DataAccess.new global_options[:database]
     db.add_task task
     # Your command logic here
      
@@ -60,6 +60,12 @@ desc 'Describe list here'
 arg_name 'Describe arguments to list here'
 command :list do |c|
   c.action do |global_options,options,args|
+    db = Calamity::DataAccess.new global_options[:database]
+    tasks = db.list_tasks
+    puts "#{'Task Name'.center(30)}#{'Context'.center(30)}#{'Project'.center(30)}"
+    tasks.each do |t|
+      puts "#{t.name.center(30) if t.name}       #{t.context.center(30) if t.context}         #{t.project.center(30) if t.project}"
+    end  
   end
 end
 

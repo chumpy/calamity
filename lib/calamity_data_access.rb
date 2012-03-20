@@ -5,13 +5,16 @@ module Calamity
   
     def initialize db_location
       @db = SQLite3::Database.new db_location
-      @db.execute <<-SQL
-        create table tasks (
-          name varchar(30),
-          context varchar(30),
-          project varchar(30)
-        );
-      SQL
+      begin
+        @db.execute <<-SQL
+          create table tasks (
+            name varchar(30),
+            context varchar(30),
+            project varchar(30)
+          );
+        SQL
+      rescue
+      end
     end
 
     def add_task task
