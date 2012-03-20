@@ -17,7 +17,7 @@ class TC_testDataAccess < Test::Unit::TestCase
     assert File.exists?('./test/calamity.db')
   end
 
-  def test_add_task
+  def test_added_task_can_be_read
     da = Calamity::DataAccess.new './test/calamity.db'
     task = Calamity::Task.new
     task.name = 'foo'

@@ -20,31 +20,35 @@ require 'sqlite3'
 
 include GLI
 
-program_desc 'Calamity is a life hacking tool'
+program_desc 'Calamity is a GTD life hacking tool'
 
 version Calamity::VERSION
 
-desc 'Describe some switch here'
-switch [:s,:switch]
+#desc 'Describe some switch here'
+#switch [:s,:switch]
 
-desc 'Describe some flag here'
-default_value 'the default'
-arg_name 'The name of the argument'
-flag [:f,:flagname]
+desc 'The database file location'
+default_value "#{ENV['HOME']}/.calamity/calamity.db"
+arg_name '<database>'
+flag [:database]
 
 desc 'Add a task'
-arg_name 'Describe arguments to add here'
+arg_name '<task name>'
 command :add do |c|
-  c.desc 'Describe a switch to add'
-  c.switch :s
-
-  c.desc 'Describe a flag to add'
-  c.default_value 'default'
-  c.flag :f
+  c.desc 'The context where the task will be accomplished'
+  c.default_value 'inbox'
+  c.arg_name '<context>'
+  c.flag [:c, :context]
+  c.desc 'The project the taske contributes to'
+  c.arg_name '<project>'
+  c.flag [:p, :project]
   c.action do |global_options,options,args|
     task = Calamity::Task.new
     task.name = args[1]
-    Calamity::DataAccess.add_task task
+    task.context = options[0]
+    task.project = options[1]
+    db = Calamity::DataAccess.new global_options[0]
+    db.add_task task
     # Your command logic here
      
     # If you have any errors, just raise them
@@ -67,10 +71,6 @@ command :done do |c|
 end
 
 pre do |global,command,options,args|
-  if !Dir.entries("#{ENV['HOME']}").include?(".calamity")
-    Dir.mkdir "#{ENV['HOME']}/.calamity"
-    Calamity::DataAccess.init
-  end  
   true
 end
 
