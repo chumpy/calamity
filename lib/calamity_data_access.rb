@@ -8,9 +8,10 @@ module Calamity
       begin
         @db.execute <<-SQL
           create table tasks (
-            name varchar(30),
-            context varchar(30),
-            project varchar(30)
+            name varchar(20),
+            context varchar(20),
+            project varchar(20),
+            status varchar(10)
           );
         SQL
       rescue
@@ -18,7 +19,7 @@ module Calamity
     end
 
     def add_task task
-      @db.execute "insert into tasks values (?,?,?)", [task.name, task.context, task.project]  
+      @db.execute "insert into tasks values (?,?,?,?)", [task.name, task.context, task.project, task.status]  
     end
 
     def list_tasks
@@ -26,9 +27,16 @@ module Calamity
       @db.execute("select * from tasks") do |row|
         task = Task.new
         task.name = row[0]  
+        task.context = row[1]
+        task.project = row[2]
+        task.status = row[3]
         tasks << task
       end
       tasks
+    end
+
+    def mark_finished task
+      @db.execute "update tasks set status = ? where name = ?", ['finished', task.name]
     end
   end
 end
