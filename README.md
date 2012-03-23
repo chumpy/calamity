@@ -16,8 +16,7 @@ usage: calamity [global options] command [command options]
 Version: 0.0.2
 
 Global Options:
-    --database="database" - The database file location (default: 
-                            /Users/kevinbeddingfield/.calamity/calamity.db)
+    --database="database" - The database file location (default: /Users/kevinbeddingfield/.calamity/calamity.db)
     --help                - Show this message
 
 Commands:
