@@ -1,5 +1,2 @@
 = calamity
 
-Generate this with
-    calamity rdoc
-After you have described your command line interface

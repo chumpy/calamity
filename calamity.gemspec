@@ -5,7 +5,7 @@ spec = Gem::Specification.new do |s|
   s.version = Calamity::VERSION
   s.author = 'Kevin Beddingfield'
   s.email = 'kevin.beddingfield@gmail.com'
-  s.homepage = 'http://kevinbeddingfield.com'
+  s.homepage = 'http://github.com/chumpy/calamity'
   s.platform = Gem::Platform::RUBY
   s.summary = 'A life hacking tool'
 # Add your other files here if you make them
@@ -14,8 +14,8 @@ bin/calamity
   )
   s.require_paths << 'lib'
   s.has_rdoc = true
-  s.extra_rdoc_files = ['README.rdoc','calamity.rdoc']
-  s.rdoc_options << '--title' << 'calamity' << '--main' << 'README.rdoc' << '-ri'
+  s.extra_rdoc_files = ['calamity.rdoc']
+  s.rdoc_options << '--title' << 'calamity' << '--main' << '-ri'
   s.bindir = 'bin'
   s.executables << 'calamity'
   s.add_development_dependency('rake')

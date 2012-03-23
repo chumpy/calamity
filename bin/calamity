@@ -29,7 +29,7 @@ version Calamity::VERSION
 
 desc 'The database file location'
 default_value "#{ENV['HOME']}/.calamity/calamity.db"
-arg_name '<database>'
+arg_name '"database"'
 flag [:database]
 
 desc 'Save a task, either to create a new one or update an existing one'
@@ -37,10 +37,10 @@ arg_name '<task name>'
 command :save do |c|
   c.desc 'The context where the task will be accomplished'
   c.default_value 'inbox'
-  c.arg_name '<context>'
+  c.arg_name '"context"'
   c.flag [:c, :context]
   c.desc 'The project the taske contributes to'
-  c.arg_name '<project>'
+  c.arg_name '"project"'
   c.flag [:p, :project]
   c.action do |global_options,options,args|
     task = Calamity::Task.new
