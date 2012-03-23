@@ -19,12 +19,16 @@ module Calamity
     end
 
     def add_task task
-      @db.execute "insert into tasks values (?,?,?,?)", [task.name, task.context, task.project, task.status]  
+      @db.execute("select * from tasks where name = ?", [task.name]) do |row|
+        @db.execute "update tasks set context = ?, project = ? where name = ?", [((task.context) ? task.context : row[1]), (task.project ? task.project : row[2]), task.name]
+        return
+      end
+      @db.execute "insert into tasks values (?,?,?,?)", [task.name, task.context, task.project, 'created']  
     end
 
     def list_tasks
       tasks = []
-      @db.execute("select * from tasks") do |row|
+      @db.execute("select * from tasks where status != 'finished'") do |row|
         task = Task.new
         task.name = row[0]  
         task.context = row[1]
