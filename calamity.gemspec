@@ -9,9 +9,8 @@ spec = Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.summary = 'A life hacking tool'
 # Add your other files here if you make them
-  s.files = %w(
-bin/calamity
-  )
+  s.files = Dir['lib/**/*.rb'] + Dir['bin/calamity']
+  s.files += Dir['test/**/*.rb']
   s.require_paths << 'lib'
   s.has_rdoc = true
   s.extra_rdoc_files = ['calamity.rdoc']
