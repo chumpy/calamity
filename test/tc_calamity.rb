@@ -32,5 +32,13 @@ class TC_testCalamity < Test::Unit::TestCase
     project = `./bin/calamity --database="./test/calamity.db" list | grep foo | awk '{print $3}'`.strip
     assert(project.eql?("buildcalamity"))
   end
+ 
+  def test_finish_task
+    `./bin/calamity --database="./test/calamity.db" save foobar`
+    `./bin/calamity --database="./test/calamity.db" finish foobar`
+    foo = `./bin/calamity --database="./test/calamity.db" list | grep foo | awk '{print $1}'`.strip
+    assert(foo.eql?(""))
+
+  end
 
 end

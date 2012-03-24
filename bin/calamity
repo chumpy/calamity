@@ -77,7 +77,9 @@ command :finish do |c|
   c.action do |global_options,options,args|
     db = Calamity::DataAccess.new global_options[:database]
     args.each do |a|    
-      db.mark_finished a
+      task = Calamity::Task.new
+      task.name = a
+      db.mark_finished task
     end
   end
 end
