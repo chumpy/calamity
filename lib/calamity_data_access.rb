@@ -26,6 +26,16 @@ module Calamity
       @db.execute "insert into tasks values (?,?,?,?)", [task.name, task.context, task.project, 'created']  
     end
 
+    def get_task task_name
+      row = @db.get_first_row("select * from tasks where name = ?", task_name)
+      task = Task.new
+      task.name = row[0]
+      task.context = row[1]
+      task.project = row[2]
+      task.status = row[3]
+      task
+    end
+
     def list_tasks
       tasks = []
       @db.execute("select * from tasks where status != 'finished'") do |row|
