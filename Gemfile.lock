@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    calamity (0.0.3)
+    calamity (0.0.4)
       gli
       sqlite3
 

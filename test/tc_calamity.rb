@@ -38,7 +38,12 @@ class TC_testCalamity < Test::Unit::TestCase
     `./bin/calamity --database="./test/calamity.db" finish foobar`
     foo = `./bin/calamity --database="./test/calamity.db" list | grep foo | awk '{print $1}'`.strip
     assert(foo.eql?(""))
+  end
 
+  def test_char_limit_on_task_name
+    `./bin/calamity --database="./test/calamity.db" save foobardfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdf`
+    foo = `./bin/calamity --database="./test/calamity.db" list | grep foo | awk '{print $1}'`.strip
+    assert(foo.eql?(""))
   end
 
 end
