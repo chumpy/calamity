@@ -64,9 +64,9 @@ command :list do |c|
     bold = `tput bold`
     underline = `tput smul`
     normal = `tput sgr0`
-    puts "#{bold}#{underline}#{'Task Name'.center(20)}#{'Context'.center(20)}#{'Project'.center(20)}#{normal}"
+    puts "#{bold}#{underline}#{'Task Name'.center(35)}#{'Context'.center(20)}#{'Project'.center(20)}#{normal}"
     tasks.each do |t|
-      puts "#{t.name.center(20) if t.name}#{t.context.center(20) if t.context}#{t.project.center(20) if t.project}"
+      puts "#{t.name.center(35) if t.name}#{t.context.center(20) if t.context}#{t.project.center(20) if t.project}"
     end  
   end
 end
