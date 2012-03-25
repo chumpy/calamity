@@ -44,6 +44,8 @@ command :save do |c|
   c.flag [:p, :project]
   c.action do |global_options,options,args|
     raise "Task name must be 35 characters or less" if args[0].size > 35 
+    raise "Context must be 20 characters or less" if (options[:context] and options[:context].size > 20)
+    raise "Project must be 20 characters or less" if (options[:project] and options[:project].size > 20)
     task = Calamity::Task.new
     task.name = args[0]
     task.context = options[:context]
