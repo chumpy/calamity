@@ -39,7 +39,7 @@ command :save do |c|
   c.default_value 'inbox'
   c.arg_name '"context"'
   c.flag [:c, :context]
-  c.desc 'The project the taske contributes to'
+  c.desc 'The project the task contributes to'
   c.arg_name '"project"'
   c.flag [:p, :project]
   c.action do |global_options,options,args|
