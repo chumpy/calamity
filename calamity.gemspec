@@ -19,6 +19,6 @@ spec = Gem::Specification.new do |s|
   s.executables << 'calamity'
   s.add_development_dependency('rake')
   s.add_development_dependency('rdoc')
-  s.add_runtime_dependency('gli')
+  s.add_runtime_dependency('gli', '~> 1.0')
   s.add_runtime_dependency('sqlite3')
 end
