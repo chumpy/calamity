@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    calamity (0.0.4)
-      gli
+    calamity (0.0.6)
+      gli (= 1.5.1)
       sqlite3
 
 GEM
